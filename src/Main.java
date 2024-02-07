@@ -32,12 +32,15 @@
  CareerCup, Palo Alto, CA.
  */
 
-
 import java.util.Arrays;
 
+/**
+ * SDEV 333 assignment URLify, practice interview question.
+ *
+ * @author Braedon Billingsley
+ */
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
-
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
@@ -45,10 +48,11 @@ public class Main {
 
         // set up empty buffer, size of 0
         char[] buffer = new char[BUFFER_CAPACITY];
-        int size = 0;
+        int size;
 
         // initialize the buffer and size variables with some data
-        String temp = "Dr Martin Luther King";
+        //String temp = "Dr Martin Luther King";
+        String temp = "Hello, World!";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
@@ -59,14 +63,34 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        size = replaceSpaces(buffer, size);
 
         // check the "after" buffer contents via println
+        System.out.println(Arrays.toString(buffer));
+
         // check to see if the new buffer's size is correct
-
-
+        System.out.println("new buffer size: " + size);
     }
 
-    // write your method here
+    // Replaces spaces in array of char buffer with '%20'
+        public static int replaceSpaces(char[] buffer, int size) {
+            // Iterate the size of the buffer
+            for(int i = 0; i < size; i++) {
 
+                // Check if index is equal to a ' '
+                if (buffer [i] == ' ' ) {
+                    // Shift over list at each space by 2;
+                    for (int j = size + 3; j >= i; j--) {
+                        buffer[j + 2] = buffer[j];
+                    }
 
+                    // Add %20 to spaces
+                    buffer[i] = '%';
+                    buffer[i + 1] = '2';
+                    buffer[i + 2] = '0';
+                    size = size + 2;
+                }
+            }
+            return size;
+        }
 }
